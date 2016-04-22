@@ -1,0 +1,9 @@
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=10000mb
+#PBS -N merge
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+ 
+java -Xmx2g -jar /share/apps/picard-tools/1.111/MergeSamFiles.jar INPUT=index_01_duplicates.bam INPUT=index_2_duplicates.bam INPUT=index_3_duplicates.bam INPUT=index_3_duplicates.bam INPUT=index_4_duplicates.bam INPUT=index_5_duplicates.bam INPUT=index_6_duplicates.bam INPUT=index_7_duplicates.bam INPUT=index_8_duplicates.bam INPUT=index_9_duplicates.bam INPUT=index_10_duplicates.bam INPUT=index_11_duplicates.bam INPUT=index_12_duplicates.bam INPUT=index_13_duplicates.bam INPUT=index_15_duplicates.bam OUTPUT=ind_1_to_15_merged.bam
