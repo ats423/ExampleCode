@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=8000mb
+#PBS -N select_variants
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+
+module load gatk/3.1-1
+
+java -jar ${GATK_JAR}  -T SelectVariants -R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa -V /scratch/a
+ts423/hw6/filtrated_variants.vcf -o selected_variants.vcf -sn index01 -sn index02 -sn index03 -sn index04 --exclud
+eNonVariants
