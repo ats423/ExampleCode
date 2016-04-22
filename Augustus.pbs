@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=04:00:00,mem=24000mb
+#PBS -N augustus
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load augustus/intel/3.0.2
+
+
+export AUGUSTUS_CONFIG_PATH=/share/apps/augustus/3.0.2/intel/config
+
+export PATH=$PATH:/scratch/ats423/hw13/VelvetOptimiser-2.2.5
+
+augustus --species=chlamydomonas --strand=both --genemodel=partial --protein=on 
+--introns=on --start=on --stop=on --cds=on --codingseq=on --gff3=on --UTR=on /sc
+ratch/ats423/hw13/auto_data_31/contigs.fa >augustus.gff
