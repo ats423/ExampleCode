@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=4,walltime=24:00:00,mem=10000mb
+#PBS -N blast
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load blast+/2.2.30
+
+blastx -query /scratch/ats423/hw11/trinity_out_dir/Trinity.fasta -db all.pep -ev
+alue .00000000000000000001 -num_threads 4 -max_target_seqs 1 -outfmt '6 std qfra
+me' -out blast_all_out
