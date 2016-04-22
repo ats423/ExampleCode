@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=10000mb
+#PBS -N indel_realign
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+
+java -Xmx2g -jar /share/apps/gatk/3.3-0/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa -I /scratch/ats423/hw5/ind_1_to_15_merged.bam -o forIndelRealigner.intervals 
+
+java -Xmx2g -jar /share/apps/gatk/3.3-0/GenomeAnalysisTK.jar -T IndelRealigner -R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa -I /scratch/ats423/hw5/ind_1_to_15_merged.bam -targetIntervals forIndelRealigner.intervals -o realignedBam.bam
