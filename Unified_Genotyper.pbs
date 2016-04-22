@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=4,walltime=24:00:00,mem=10000mb
+#PBS -N Indels_call_2
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load gatk/3.1-1
+
+java -Xmx2g -jar ${GATK_JAR} -nt 4 -T UnifiedGenotyper -I merged_realigned.bam -
+R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa --output_mode EMIT_VA
+RIANTS_ONLY -ploidy 1 -glm SNP -o snps_merged_2.vcf
+
+java -Xmx2g -jar ${GATK_JAR} -nt 4 -T UnifiedGenotyper -R /scratch/ats423/refenc
+e_genome_green/Creinhardtii_236.fa -I merged_realigned.bam --output_mode EMIT_VA
+RIANTS_ONLY -ploidy 1 -glm INDEL -o indels_merged_2.vcf
