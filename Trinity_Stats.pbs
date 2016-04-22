@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#BS -l nodes=1:ppn=1,walltime=24:00:00,mem=20000mb
+#PBS -N stats
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load trinityrnaseq/intel/20140717
+module load perl/intel/5.18.2
+
+perl /share/apps/trinityrnaseq/20140717/trinityrnaseq__r20140717/util/analyze_blastPlus_topHit_coverage.pl blast_a
+ll_out_2.txt /scratch/ats423/hw11/trinity_out_dir/Trinity.fasta all.pep 
