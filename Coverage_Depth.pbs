@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=10000mb
+#PBS -N depth
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load gatk/3.1-1
+
+java -Xmx2g  -jar ${GATK_JAR} -T DepthOfCoverage -R  /scratch/courses/BI7653/hw77
+/Task_1/Creinhardtii_236.fa -o chr_13_depth -I /scratch/courses/BI7653/hw7/Task__
+1/chromosome_13.bam -L /scratch/courses/BI7653/hw7/Task_1/chromosome_13.bed --omm
+itDepthOutputAtEachBase
+~                           
