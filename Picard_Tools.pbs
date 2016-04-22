@@ -1,0 +1,22 @@
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=10000mb
+#PBS -N alignment_processing
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+java -Xmx2g -jar /share/apps/picard-tools/1.111/AddOrReplaceReadGroups.jar INPUT=index_01.bam OUTPUT=index_01_Add_Groups.bam RGID=index01 RGLB=index01 RGPL=illumina RGPU=ATCACG RGSM=index01
+
+java -Xmx2g -jar /share/apps/picard-tools/1.111/FixMateInformation.jar INPUT=index_01_Add_Groups.bam OUTPUT=index_01_Fix_Mate_Sorted.bam SORT_ORDER=coordinate
+
+module load samtools/intel/1.2
+
+samtools index index_01_Fix_Mate_Sorted.bam 
+
+java -Xmx2g -jar /share/apps/picard-tools/1.111/MarkDuplicates.jar INPUT=index_01_Fix_Mate_Sorted.bam OUTPUT=index_01_duplicates.bam REMOVE_DUPLICATES=false METRICS_FILE=index_01_metrics.txt
+
+module load samtools/intel/1.2
+
+samtools index index_01_duplicates.bam 
+
