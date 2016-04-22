@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=6,walltime=24:00:00,mem=42000mb
+#PBS -N trim_14
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load trinityrnaseq/intel/20140717
+
+module load samtools/intel/1.2
+
+module load bowtie/intel/1.0.1
+
+Trinity --seqType fq --JM 40G --left /scratch/ats423/hw11/output_forward_paired_003.fq.gz --right /scratch/ats423/hw11/output_reverse_paired_003.fq.gz --CPU 6 –output /scratch/ats423/hw11/trinity_out_dir
