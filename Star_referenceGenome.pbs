@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=8,walltime=04:00:00,mem=25000mb
+#PBS -N Prepare Reference Genome
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load star/intel/2.4
+
+STAR --runMode genomeGenerate --genomeDir /scratch/ats423/hw8/rice_genome --genomeFastaFiles /scratch/ats423/hw8/rice_genome/all.con --sjdbGTFfile /scratch/ats423/hw8/rice_genome/all.gff3 --sjdbGTFtagExonParentTranscript Parent  --sjdbOverhang 50 --runThreadN 4
