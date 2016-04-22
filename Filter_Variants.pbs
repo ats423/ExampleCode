@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=8000mb
+#PBS -N vcf_filtering
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+
+module load gatk/3.1-1
+
+java -jar ${GATK_JAR} -T VariantFiltration -R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa -o filtrate
+d_variants.vcf --variant /scratch/ats423/hw6/annotated_variants.vcf --filterExpression "QUAL < 40.0 && DP < 10.00 
+&& SNPEFF_EFFECT == 'STOP_GAINED'" --filterName "Task3filters"
