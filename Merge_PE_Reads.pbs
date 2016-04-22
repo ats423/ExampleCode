@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=20000mb
+#PBS -N shuffle
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load perl/intel/5.18.2
+
+
+perl /scratch/courses/BI7653/hw12/shuffleSequences_fastq.pl /scratch/courses/BI7
+653/hw12/CR1690_unmapped_R1_trim.fq /scratch/courses/BI7653/hw12/CR1690_unmapped
+_R2_trim.fq /scratch/ats423/hw13/CR1690_shuffled.fq
