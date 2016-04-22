@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=2,walltime=24:00:00,mem=10000mb
+#PBS -N soap
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j eo
+
+cd ${PBS_O_WORKDIR}
+
+module load soapdenovo2/intel/r240
+
+SOAPdenovo-63mer all -p 2 -s  /scratch/ats423/Bacteria/config_file.config -K 63 
+-o outputSoap 
