@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=10000mb
+#PBS -N velveth
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j eo
+
+cd ${PBS_O_WORKDIR}
+
+module load velvet/gnu/1.2.10
+
+velveth out_data_31 31 -fastq.gz -shortPaired -separate /scratch/ats423/Bacteria
+/SRR2062214_1_Trimmed_Paired.fastq.gz /scratch/ats423/Bacteria/SRR2062214_2_Trim
+med_Paired.fastq.gz 
