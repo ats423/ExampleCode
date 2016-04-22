@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=02:00:00,mem=8000mb
+#PBS -N trim_14
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+java -jar /share/apps/trimmomatic/0.32/trimmomatic-0.32.jar PE -phred33 /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/lane3-index14-AGTTCC-442_AGTTCC_L003_R1_001_filtered.fastq.gz /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/lane3-index14-AGTTCC-442_AGTTCC_L003_R2_001_filtered.fastq.gz /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/output_forward_paired_14.fq.gz /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/output_forward_unpaired_14.fq.gz /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/output_reverse_paired_14.fq.gz /scratch/ats423/hw4/Sample_lane3-index14-AGTTCC-442/output_reverse_unpaired_14.fq.gz ILLUMINACLIP:/share/apps/trimmomatic/0.32/adapters/TruSeq3-PE.fa:2:30:10 LEADING:10 TRAILING:10 SLIDINGWINDOW:4:15 MINLEN:36
