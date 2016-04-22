@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,walltime=24:00:00,mem=8000mb
+#PBS -N annotate_variants
+#PBS -M ats423@nyu.edu
+#PBS -m a
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+module load gatk/3.1-1
+
+java -jar ${GATK_JAR} -T VariantAnnotator -R /scratch/ats423/refence_genome_green/Creinhardtii_236.fa -A SnpEff --
+variant /scratch/ats423/hw6/snps_merged_2.vcf --snpEffFile /scratch/ats423/hw6/snpeff_out_2.vcf -L /scratch/ats423
+/hw6/snps_merged_2.vcf -o annotated_variants.vcf 
